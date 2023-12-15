@@ -10,6 +10,7 @@ import com.example.finalproject.ui.theme.FinalProjectTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.finalproject.ui.screens.HomePage
 import com.example.finalproject.ui.screens.WelcomePage
 
 
@@ -19,11 +20,19 @@ class MainActivity : ComponentActivity() {
         setContent {
             FinalProjectTheme {
                 val navController = rememberNavController()
-                NavHost(navController =  navController, startDestination = "WelcomePage") {
+                val welcome = WelcomePage()
+                val home = HomePage()
+                NavHost(navController =  navController,
+                    startDestination = when(welcome.getVisited()){
+                        false  -> "WelcomePage"
+                        else -> "HomePage"}){
                     composable("WelcomePage") {
-                        WelcomePage(
+                        welcome.WelcomePageLayout (
                             navigateToHomePage = { navController.navigate("HomePage") },
                         )
+                    }
+                    composable("HomePage") {
+                        home.HomePageLayout(welcome)
                     }
 
                 }
@@ -37,7 +46,7 @@ class MainActivity : ComponentActivity() {
 fun FinalProjectPreview(){
     FinalProjectTheme {
         Surface {
-            WelcomePage(navigateToHomePage = { })
+            HomePage().HomePageLayout (welcome = WelcomePage())
         }
     }
 }

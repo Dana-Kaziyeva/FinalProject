@@ -12,3 +12,4 @@ val Pink40 = Color(0xFF7D5260)
 
 val MainBackgroundColor = Color(230,235,254)
 val Welcome_Color = Color(79,82,255)
+val HomePage_Color = Color(145,179,250)

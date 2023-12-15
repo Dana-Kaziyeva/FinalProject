@@ -1,5 +1,3 @@
 <resources>
     <string name="app_name">DreamForge</string>
-    <string name="user_name">User name</string>
-    <string name="age">Age</string>
 </resources>

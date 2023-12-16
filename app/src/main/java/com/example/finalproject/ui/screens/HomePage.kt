@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -29,6 +30,7 @@ import com.example.finalproject.R
 import com.example.finalproject.ui.theme.fontFamily
 import kotlin.Pair
 import kotlin.random.Random
+import kotlin.time.Duration.Companion.seconds
 
 class Pair {
     val desc = ""
@@ -91,43 +93,42 @@ class HomePage {
     @Composable
     fun HomePageLayout(welcome: WelcomePage, n:Int) {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Row(modifier = Modifier
-                .fillMaxWidth()
-                .height(80.dp)
-                .background(color = Color(104, 136, 180))
-                .padding(17.dp)
-            )
-            {
-                Spacer(modifier = Modifier.width(10.dp))
-                Text(
-                    text = "Hi, ${welcome.getName()}!",
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontFamily = fontFamily,
-                    color = Color.White,
-                    textAlign = TextAlign.Left,
-                    modifier = Modifier.padding(top = 3.dp, bottom = 3.dp)
-                )
-                    Spacer(modifier = Modifier.width(140.dp))
-                    Image(
-                        painter = painterResource(R.drawable.profile_img),
-                        contentDescription = "profile_img",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(49.dp)
-                            .clip(CircleShape)
-                    )
-
-            }
-            Spacer(modifier = Modifier.height(50.dp))
+//            Row(modifier = Modifier
+//                .fillMaxWidth()
+//                .height(80.dp)
+//                .background(color = Color(104, 136, 180))
+//                .padding(17.dp)
+//            )
+//            {
+//                Spacer(modifier = Modifier.width(10.dp))
+//                Text(
+//                    text = "Hi, ${welcome.getName()}!",
+//                    style = MaterialTheme.typography.headlineMedium,
+//                    fontFamily = fontFamily,
+//                    color = Color.White,
+//                    textAlign = TextAlign.Left,
+//                    modifier = Modifier.padding(top = 3.dp, bottom = 3.dp)
+//                )
+//                    Spacer(modifier = Modifier.width(140.dp))
+//                    Image(
+//                        painter = painterResource(R.drawable.profile_img),
+//                        contentDescription = "profile_img",
+//                        contentScale = ContentScale.Crop,
+//                        modifier = Modifier
+//                            .size(49.dp)
+//                            .clip(CircleShape)
+//                    )
+//
+//            }
+            Spacer(modifier = Modifier.height(120.dp))
             Image(
                 painter = painterResource(R.drawable.home_page_img),
                 contentDescription = "home_page_img",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .width(220.dp)
-                    .height(240.dp)
-            )
-            Spacer(modifier = Modifier.height(10.dp))
+                    .height(240.dp))
+            Spacer(modifier = Modifier.height(30.dp))
             Text(
                 text = motivation_list.get(n).first,
                 modifier = Modifier.width(270.dp),
@@ -147,10 +148,12 @@ class HomePage {
             )
             Spacer(modifier = Modifier.height(70.dp))
 
+
         }
     }
-
 }
+
+
 
 
 

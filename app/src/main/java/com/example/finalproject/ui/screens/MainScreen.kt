@@ -1,10 +1,20 @@
 package com.example.finalproject.ui.screens
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.ContentAlpha
+import androidx.compose.material.LocalContentColor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Search
@@ -25,13 +35,17 @@ import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.finalproject.ui.NavGraph
 import com.example.finalproject.ui.theme.HomePage_Color
+import com.example.finalproject.ui.theme.fontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -39,7 +53,7 @@ import com.example.finalproject.ui.theme.HomePage_Color
 fun MainScreen() {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-//    val welcome = WelcomePage()
+    val welcome = WelcomePage()
 //    val home = HomePage()
 //    val goal = GoalListPage()
 
@@ -63,59 +77,102 @@ fun MainScreen() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopHomeBar(navController: NavController, name: String) {
-    TopAppBar(
-        backgroundColor = MaterialTheme.colorScheme.primaryContainer, // Use backgroundColor instead of colors
-        contentColor = MaterialTheme.colorScheme.primary, // Use contentColor instead of titleContentColor
-        title = {
-            Text(
-                text = "Hi, $name ",
-            )
-        },
-        navigationIcon = {
-            IconButton(onClick = { navController.navigate("Settings") }) {
-                Icon(
-                    imageVector = Icons.Filled.AccountCircle,
-                    contentDescription = "Profile icon"
-                )
-            }
-
-        },
-
+    Row(modifier = Modifier
+        .fillMaxWidth()
+        .height(80.dp)
+        .background(color = HomePage_Color)
+        .padding(17.dp), horizontalArrangement = Arrangement.SpaceAround
     )
+    {
+//        Spacer(modifier = Modifier.width(10.dp))
+        var name = WelcomePage().getName()
+        Text(
+            text = "Hi, $name!",
+            style = MaterialTheme.typography.headlineMedium,
+            fontFamily = fontFamily,
+            color = Color.White,
+            fontSize = 32.sp,
+            modifier = Modifier.padding(top = 3.dp, bottom = 3.dp)
+        )
+//        Spacer(modifier = Modifier.width(140.dp))
+        IconButton(onClick = { navController.navigate("Settings") }) {
+            Icon(
+                imageVector = Icons.Filled.AccountCircle,
+                contentDescription = "Profile icon",
+                modifier = Modifier.size(49.dp),
+                tint = Color.White
+            )
+        }
+
+    }
 }
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopListBar(navController: NavController, screenTitle: String) {
-        CenterAlignedTopAppBar(
-            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                containerColor = HomePage_Color,
-                titleContentColor = Color.White,
-            ),
-            title = {
-                Text(
-                    text = screenTitle,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-            },
-            navigationIcon = {
-                IconButton(onClick = { navController.navigate("Settings") }) {
-                    Icon(
-                        imageVector = Icons.Filled.AccountCircle,
-                        contentDescription = "Profile icon"
-                    )
-                }
-                IconButton(onClick = { }) {
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        contentDescription = "Search icon"
-                    )
-                }
-            },
+    Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier
+        .fillMaxWidth()
+        .height(80.dp)
+        .background(color = HomePage_Color)
+        .padding(17.dp)){
+        IconButton(onClick = { navController.navigate("Settings") }) {
+            Icon(
+                imageVector = Icons.Filled.AccountCircle,
+                contentDescription = "Profile icon",
+                modifier = Modifier.size(49.dp),
+                tint = Color.White
+            )
+        }
+        Text(
+            text = screenTitle,
+            style = MaterialTheme.typography.headlineMedium,
+            fontFamily = fontFamily,
+            color = Color.White,
+            fontSize = 32.sp
         )
+        IconButton(onClick = { }) {
+            Icon(
+                imageVector = Icons.Default.Search,
+                contentDescription = "Search icon",
+                modifier = Modifier.size(49.dp),
+                tint = Color.White
+            )
+        }
+        }
     }
+//        TopAppBar(
+//            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+//                containerColor = HomePage_Color,
+//                titleContentColor = Color.White,
+//            ),
+//            title = {
+//                Text(
+//                    text = screenTitle,
+//                    maxLines = 1,
+//                    overflow = TextOverflow.Ellipsis
+//                )
+//            },
+//            navigationIcon = {
+//                IconButton(onClick = { navController.navigate("Settings") }) {
+//                    Icon(
+//                        imageVector = Icons.Filled.AccountCircle,
+//                        contentDescription = "Profile icon",
+//                        modifier = Modifier.size(49.dp),
+//                        tint = Color.White
+//                    )
+//                }
+//                IconButton(onClick = { }) {
+//                    Icon(
+//                        imageVector = Icons.Default.Search,
+//                        contentDescription = "Search icon",
+//                        modifier = Modifier.size(49.dp),
+//                        tint = Color.White
+//                    )
+//                }
+//            },
+//        )
+//    }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -136,7 +193,9 @@ fun TopListItemBar(navController: NavController, screenTitle: String) {
             IconButton(onClick = { navController.navigate("Settings") }) {
                 Icon(
                     imageVector = Icons.Filled.AccountCircle,
-                    contentDescription = "Profile icon"
+                    contentDescription = "Profile icon",
+                    modifier = Modifier.size(49.dp),
+                    tint = Color.White
                 )
             }
             IconButton(onClick = { }) {
@@ -148,7 +207,9 @@ fun TopListItemBar(navController: NavController, screenTitle: String) {
                              else -> Icons.Sharp.List
                         }
                     ,
-                    contentDescription = "Search icon"
+                    contentDescription = "Search icon",
+                    modifier = Modifier.size(49.dp),
+                    tint = Color.White
                 )
             }
         },
@@ -173,7 +234,10 @@ fun BottomBar(navController: NavController){
             BottomNavigationItem(
                 selected = selected,
                 onClick = {
-                    navController.navigate(screen.route)
+                    navController.navigate(screen.route){
+                        popUpTo(navController.graph.findStartDestination().id)
+                        launchSingleTop = true
+                    }
                 },
                 icon = {
                     Column(horizontalAlignment = CenterHorizontally) {
@@ -184,7 +248,7 @@ fun BottomBar(navController: NavController){
                                 tint = Color.White,
                                 modifier = Modifier.alpha(1.0f)
                             )
-                            Text(text = screen.title)
+                            Text(text = screen.title, color = Color.White)
                         }
                         else
                             Icon(
@@ -196,9 +260,8 @@ fun BottomBar(navController: NavController){
 
                     }
                 },
-                selectedContentColor = Color.Green,
-                unselectedContentColor = Color.Green,
-
+                selectedContentColor = Color.Blue,
+                unselectedContentColor = LocalContentColor.current.copy(alpha = ContentAlpha.disabled),
                 )
         }
 }

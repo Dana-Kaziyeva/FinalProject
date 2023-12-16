@@ -13,6 +13,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Surface
@@ -33,13 +34,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.finalproject.R
+import com.example.finalproject.ui.NavGraph
 import com.example.finalproject.ui.theme.FinalProjectTheme
 import com.example.finalproject.ui.theme.MainBackgroundColor
 import com.example.finalproject.ui.theme.Welcome_Color
 import kotlin.math.roundToInt
 
 class WelcomePage {
-    private var name: String =""
+    private var name: String ="Ainalaiyn"
     private var age: Int = 5
     private var visited: Boolean = false
 
@@ -131,8 +133,6 @@ class WelcomePage {
                         focusManager.clearFocus()
                         if(userName.isNotEmpty())
                             name = userName
-                        else
-                            name = "Ainalaiyn"
                     },
 
                     ),

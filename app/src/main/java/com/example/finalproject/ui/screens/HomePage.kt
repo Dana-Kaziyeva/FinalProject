@@ -37,7 +37,6 @@ class Pair {
 }
 
 class HomePage {
-    val bar = MenuBar()
     val motivation_list = listOf(
         Pair("Nothing is impossible, the word itself says \"I'm possible\"!",
             "Audrey Hepburn"),
@@ -90,7 +89,7 @@ class HomePage {
 
     )
     @Composable
-    fun HomePageLayout(welcome: WelcomePage) {
+    fun HomePageLayout(welcome: WelcomePage, n:Int) {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
             Row(modifier = Modifier
                 .fillMaxWidth()
@@ -129,7 +128,6 @@ class HomePage {
                     .height(240.dp)
             )
             Spacer(modifier = Modifier.height(10.dp))
-            val n = Random.nextInt(1,24)
             Text(
                 text = motivation_list.get(n).first,
                 modifier = Modifier.width(270.dp),
@@ -148,7 +146,6 @@ class HomePage {
 
             )
             Spacer(modifier = Modifier.height(70.dp))
-            bar.BottomBar()
 
         }
     }

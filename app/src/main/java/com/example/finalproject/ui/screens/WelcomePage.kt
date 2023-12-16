@@ -15,6 +15,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.*
@@ -28,15 +29,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.finalproject.R
+import com.example.finalproject.ui.theme.FinalProjectTheme
 import com.example.finalproject.ui.theme.MainBackgroundColor
 import com.example.finalproject.ui.theme.Welcome_Color
 import kotlin.math.roundToInt
 
 class WelcomePage {
-    private var name: String ="Ainalaiyn"
+    private var name: String =""
     private var age: Int = 5
     private var visited: Boolean = false
 
@@ -58,6 +61,8 @@ class WelcomePage {
     fun getVisited(): Boolean{
         return visited
     }
+
+
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun WelcomePageLayout(
@@ -126,6 +131,8 @@ class WelcomePage {
                         focusManager.clearFocus()
                         if(userName.isNotEmpty())
                             name = userName
+                        else
+                            name = "Ainalaiyn"
                     },
 
                     ),

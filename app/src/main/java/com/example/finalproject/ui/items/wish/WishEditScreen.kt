@@ -17,7 +17,7 @@ object WishEditDestination : NavigationDestination {
     const val wishIdArg = "wishId"
     val routeWithArgs = "$route/{$wishIdArg}"
 }
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun WishEditScreen(
     navigateBack: () -> Unit,

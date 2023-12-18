@@ -1,6 +1,7 @@
 package com.example.finalproject.ui.home
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -38,6 +39,7 @@ import com.example.finalproject.R
 import com.example.finalproject.data.ToDoList
 import com.example.finalproject.ui.AppViewModelProvider
 import com.example.finalproject.ui.navigation.NavigationDestination
+import com.example.finalproject.ui.theme.HomePage_Color
 
 object ItemHomeDestination : NavigationDestination {
     override val route = "itemHome"
@@ -116,7 +118,7 @@ private fun ItemHomeBody(
 private fun ItemList(
     itemList: List<ToDoList>, onItemClick: (ToDoList) -> Unit, modifier: Modifier = Modifier
 ) {
-    LazyColumn(modifier = modifier) {
+    LazyColumn(modifier = modifier.fillMaxWidth()) {
         items(items = itemList, key = { it.id }) { item ->
             Item(item = item,
                 modifier = Modifier
@@ -131,16 +133,22 @@ private fun Item(
     item: ToDoList, modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier, elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        modifier = modifier,
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer)
     ) {
         Column(
-            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large)),
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large)).fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small))
         ) {
-            Text(
-                text = item.desc,
-                style = MaterialTheme.typography.titleMedium
-            )
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    text = item.desc,
+                    style = MaterialTheme.typography.titleMedium
+                )
+
+            }
         }
     }
 }

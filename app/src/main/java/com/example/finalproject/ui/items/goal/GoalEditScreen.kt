@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.finalproject.R
 import com.example.finalproject.ui.AppViewModelProvider
-import com.example.finalproject.ui.items.item.ItemsEditViewModel
 import com.example.finalproject.ui.navigation.NavigationDestination
 import kotlinx.coroutines.launch
 

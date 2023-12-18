@@ -79,7 +79,7 @@ fun GoalDetailsScreen(
         }, modifier = modifier
     ) { innerPadding ->
         GoalDetailsBody(
-            goalDetailsUiState = GoalDetailsUiState(),
+            goalDetailsUiState = uiState.value,
             onDelete = {
                 coroutineScope.launch {
                     viewModel.deleteItem()
@@ -104,9 +104,6 @@ private fun GoalDetailsBody(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
     ) {
         var deleteConfirmationRequired by rememberSaveable { mutableStateOf(false) }
-        GoalDetails(
-            item = goalDetailsUiState.goalDetails.toGoal(), modifier = Modifier.fillMaxWidth()
-        )
         GoalDetails(
             item = goalDetailsUiState.goalDetails.toGoal(),
             modifier = Modifier.fillMaxWidth()

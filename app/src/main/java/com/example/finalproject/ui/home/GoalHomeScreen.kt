@@ -1,10 +1,12 @@
 package com.example.finalproject.ui.home
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -35,6 +37,7 @@ import com.example.finalproject.R
 import com.example.finalproject.data.Goals
 import com.example.finalproject.ui.AppViewModelProvider
 import com.example.finalproject.ui.navigation.NavigationDestination
+import com.example.finalproject.ui.theme.HomePage_Color
 
 object GoalHomeDestination : NavigationDestination {
     override val route = "goalHome"
@@ -59,7 +62,8 @@ fun GoalHomeScreen(
             InventoryTopAppBar(
                 title = stringResource(GoalHomeDestination.titleRes),
                 canNavigateBack = false,
-                scrollBehavior = scrollBehavior
+                scrollBehavior = scrollBehavior,
+
             )
         },
         floatingActionButton = {
@@ -113,7 +117,7 @@ private fun GoalHomeBody(
 private fun GoalList(
     itemList: List<Goals>, onItemClick: (Goals) -> Unit, modifier: Modifier = Modifier
 ) {
-    LazyColumn(modifier = modifier) {
+    LazyColumn(modifier = modifier.fillMaxWidth()) {
         items(items = itemList, key = { it.id }) { item ->
             Item(item = item,
                 modifier = Modifier
@@ -128,10 +132,13 @@ private fun Item(
     item: Goals, modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier, elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        modifier = modifier,
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer)
     ) {
         Column(
-            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large)),
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large)).fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small))
         ) {
             Text(

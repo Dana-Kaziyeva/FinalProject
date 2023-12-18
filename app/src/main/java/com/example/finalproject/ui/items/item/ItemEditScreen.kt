@@ -11,8 +11,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.finalproject.InventoryTopAppBar
 import com.example.finalproject.R
 import com.example.finalproject.ui.AppViewModelProvider
-//import com.example.finalproject.ui.items.item.UserEntryBody
-//import com.example.finalproject.ui.items.item.WishEntryBody
 import com.example.finalproject.ui.navigation.NavigationDestination
 import kotlinx.coroutines.launch
 

@@ -1,10 +1,13 @@
 package com.example.finalproject.ui.home
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -24,6 +27,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -35,6 +39,7 @@ import com.example.finalproject.R
 import com.example.finalproject.data.User
 import com.example.finalproject.ui.AppViewModelProvider
 import com.example.finalproject.ui.navigation.NavigationDestination
+import com.example.finalproject.ui.theme.HomePage_Color
 
 object UserHomeDestination : NavigationDestination {
     override val route = "userHome"
@@ -113,12 +118,14 @@ private fun UserHomeBody(
 private fun UserList(
     itemList: List<User>, onItemClick: (User) -> Unit, modifier: Modifier = Modifier
 ) {
-    LazyColumn(modifier = modifier) {
+    LazyColumn(modifier = modifier.fillMaxWidth()) {
         items(items = itemList, key = { it.id }) { item ->
             Item(item = item,
                 modifier = Modifier
                     .padding(dimensionResource(id = R.dimen.padding_small))
                     .clickable { onItemClick(item) })
+
+
         }
     }
 }
@@ -128,20 +135,29 @@ private fun Item(
     item: User, modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier, elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        modifier = modifier,
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer)
     ) {
         Column(
-            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large)),
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large)).fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small))
         ) {
-            Text(
-                text = item.name,
-                style = MaterialTheme.typography.titleLarge,
-            )
-            Text(
-                text = item.age.toString(),
-                style = MaterialTheme.typography.titleMedium
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = item.name,
+                    style = MaterialTheme.typography.titleLarge,
+                    color = Color.White
+                )
+                Text(
+                    text = item.age.toString(),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = Color.White
+                )
+            }
         }
     }
 }

@@ -39,7 +39,8 @@ import com.example.finalproject.ui.items.wish.WishEditDestination
 import com.example.finalproject.ui.items.wish.WishEditScreen
 import com.example.finalproject.ui.items.wish.WishEntryDestination
 import com.example.finalproject.ui.items.wish.WishEntryScreen
-import com.example.finalproject.ui.screens.HomePage
+import com.example.finalproject.ui.screens.HomePageLayout
+import com.example.finalproject.ui.screens.Settings
 import com.example.finalproject.ui.screens.WelcomePage
 import kotlin.random.Random
 
@@ -48,12 +49,8 @@ fun NavGraph(navController: NavHostController,
              modifier: Modifier = Modifier,) {
     NavHost(
         navController = navController,
-        startDestination = ItemHomeDestination.route,
+        startDestination = "HomePage",
         modifier = modifier
-//        startDestination = when (WelcomePage().getVisited()) {
-//            false -> "WelcomePage"
-//            else -> "HomePage"
-//        }
     )
     {
         composable("WelcomePage") {
@@ -62,25 +59,13 @@ fun NavGraph(navController: NavHostController,
             )
         }
         composable("HomePage") {
-            HomePage().HomePageLayout(WelcomePage(), Random.nextInt(1,24))
+            HomePageLayout(WelcomePage(), Random.nextInt(1,24),
+                 navigateToSettings = {navController.navigate("Settings")} )
         }
-//        composable(route = MenuBar.WishList.route) {
-//            WishListPage()
-//        }
-//        composable(route = MenuBar.GoalList.route) {
-//            GoalListPage().GoalListPageLayout()
-//        }
-//        composable(route = MenuBar.ToDoList.route) {
-//            ToDoListPage()
-//        }
-//        composable(route = MenuBar.AddItem.route) {
-//            HomePage().HomePageLayout(WelcomePage(), Random.nextInt(1,24))
-//        }
-//        composable("Settings") {
-//           Settings()
-//        }
-//        composable(MenuBar.ToDoList.route) {
-            composable(route = ItemHomeDestination.route) {
+        composable("Settings") {
+            Settings()
+        }
+        composable(route = ItemHomeDestination.route) {
             ItemHomeScreen(
                 navigateToItemEntry = { navController.navigate(ItemEntryDestination.route) },
                 navigateToItemUpdate = {
@@ -88,7 +73,6 @@ fun NavGraph(navController: NavHostController,
                 }
             )
         }
-//        composable(MenuBar.WishList.route) {
             composable(route = WishHomeDestination.route) {
             WishHomeScreen(
                 navigateToWishEntry = { navController.navigate(WishEntryDestination.route) },
@@ -97,7 +81,6 @@ fun NavGraph(navController: NavHostController,
                 }
             )
         }
-//        composable(MenuBar.GoalList.route) {
             composable(route = GoalHomeDestination.route) {
             GoalHomeScreen(
                 navigateToGoalEntry = { navController.navigate(GoalEntryDestination.route) },
@@ -106,7 +89,6 @@ fun NavGraph(navController: NavHostController,
                 }
             )
         }
-//        composable(MenuBar.AddItem.route) {
             composable(route = UserHomeDestination.route) {
             UserHomeScreen(
                 navigateToUserEntry = { navController.navigate(UserEntryDestination.route) },

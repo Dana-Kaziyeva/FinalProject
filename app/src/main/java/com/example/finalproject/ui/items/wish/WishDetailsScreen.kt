@@ -79,7 +79,7 @@ fun WishDetailsScreen(
         }, modifier = modifier
     ) { innerPadding ->
         WishDetailsBody(
-            wishDetailsUiState = WishDetailsUiState(),
+            wishDetailsUiState = uiState.value,
             onDelete = {
                 coroutineScope.launch {
                     viewModel.deleteItem()
@@ -108,10 +108,6 @@ private fun WishDetailsBody(
         var deleteConfirmationRequired by rememberSaveable { mutableStateOf(false) }
         WishDetails(
             item = wishDetailsUiState.wishDetails.toWish(), modifier = Modifier.fillMaxWidth()
-        )
-        WishDetails(
-            item = wishDetailsUiState.wishDetails.toWish(),
-            modifier = Modifier.fillMaxWidth()
         )
         OutlinedButton(
             onClick = { deleteConfirmationRequired = true },

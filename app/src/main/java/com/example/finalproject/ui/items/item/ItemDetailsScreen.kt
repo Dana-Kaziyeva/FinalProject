@@ -106,9 +106,6 @@ private fun ItemDetailsBody(
     ) {
         var deleteConfirmationRequired by rememberSaveable { mutableStateOf(false) }
         ItemDetails(
-            item = itemDetailsUiState.itemDetails.toItem(), modifier = Modifier.fillMaxWidth()
-        )
-        ItemDetails(
             item = itemDetailsUiState.itemDetails.toItem(),
             modifier = Modifier.fillMaxWidth()
         )

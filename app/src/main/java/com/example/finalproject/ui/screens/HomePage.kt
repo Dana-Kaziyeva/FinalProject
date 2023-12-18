@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,14 +20,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.finalproject.R
+import com.example.finalproject.TopHomeBar
 
 class Pair {
     val desc = ""
     val author = ""
 
 }
-
-class HomePage {
     val motivation_list = listOf(
         Pair("Nothing is impossible, the word itself says \"I'm possible\"!",
             "Audrey Hepburn"),
@@ -77,41 +78,51 @@ class HomePage {
             "Mark Cuban")
 
     )
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @Composable
-    fun HomePageLayout(welcome: WelcomePage, n:Int) {
-        Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Spacer(modifier = Modifier.height(120.dp))
-            Image(
-                painter = painterResource(R.drawable.home_page_img),
-                contentDescription = "home_page_img",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .width(220.dp)
-                    .height(240.dp))
-            Spacer(modifier = Modifier.height(30.dp))
-            Text(
-                text = motivation_list.get(n).first,
-                modifier = Modifier.width(270.dp),
-                textAlign = TextAlign.Center,
-                fontWeight = FontWeight.Normal,
-                color = Color(104, 136, 180)
-            )
-            Text(
-                text = motivation_list.get(n).second,
-                modifier = Modifier
-                    .width(200.dp)
-                    .padding(top = 10.dp),
-                textAlign = TextAlign.Center,
-                fontWeight = FontWeight.Bold,
-                color = Color(104, 136, 180)
+    fun HomePageLayout(welcome: WelcomePage, n:Int, navigateToSettings: () -> Unit) {
+        Scaffold(
+            topBar = {
+                TopHomeBar({ navigateToSettings() })
+            },
+        ) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Spacer(modifier = Modifier.height(120.dp))
+                Image(
+                    painter = painterResource(R.drawable.home_page_img),
+                    contentDescription = "home_page_img",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .width(220.dp)
+                        .height(240.dp)
+                )
+                Spacer(modifier = Modifier.height(30.dp))
+                Text(
+                    text = motivation_list.get(n).first,
+                    modifier = Modifier.width(270.dp),
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Normal,
+                    color = Color(104, 136, 180)
+                )
+                Text(
+                    text = motivation_list.get(n).second,
+                    modifier = Modifier
+                        .width(200.dp)
+                        .padding(top = 10.dp),
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(104, 136, 180)
 
-            )
-            Spacer(modifier = Modifier.height(70.dp))
+                )
+                Spacer(modifier = Modifier.height(70.dp))
 
 
+            }
         }
     }
-}
 
 
 

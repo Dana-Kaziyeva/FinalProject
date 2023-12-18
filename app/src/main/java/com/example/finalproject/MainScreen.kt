@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -26,6 +27,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
@@ -37,6 +39,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -44,9 +47,11 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.finalproject.ui.navigation.NavGraph
 import com.example.finalproject.ui.navigation.MenuBar
 import com.example.finalproject.ui.screens.WelcomePage
+import com.example.finalproject.ui.theme.FinalProjectTheme
 import com.example.finalproject.ui.theme.HomePage_Color
 import com.example.finalproject.ui.theme.fontFamily
 
@@ -65,13 +70,11 @@ fun MainScreen(navController: NavHostController = rememberNavController()) {
     {
         NavGraph(navController = navController)
     }
-//    NavGraph(navController = navController)
-//
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopHomeBar(navController: NavController, name: String) {
+fun TopHomeBar(navigateToSettings: () -> Unit = {},) {
     Row(modifier = Modifier
         .fillMaxWidth()
         .height(80.dp)
@@ -89,7 +92,7 @@ fun TopHomeBar(navController: NavController, name: String) {
             fontSize = 32.sp,
             modifier = Modifier.padding(top = 3.dp, bottom = 3.dp)
         )
-        IconButton(onClick = { navController.navigate("Settings") }) {
+        IconButton(onClick = { navigateToSettings }) {
             Icon(
                 imageVector = Icons.Filled.AccountCircle,
                 contentDescription = "Profile icon",
@@ -106,22 +109,46 @@ fun TopHomeBar(navController: NavController, name: String) {
 fun InventoryTopAppBar(
     title: String,
     canNavigateBack: Boolean,
-    modifier: Modifier = Modifier,
+    navigateSettings: () -> Unit = {},
     scrollBehavior: TopAppBarScrollBehavior? = null,
-    navigateUp: () -> Unit = {}
+    navigateUp: () -> Unit = {},
 ) {
     CenterAlignedTopAppBar(
-        title = { Text(title) },
-        modifier = modifier,
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = HomePage_Color,
+            titleContentColor = Color.White,
+        ),
+        title = {
+            Text(
+                title,
+                style = MaterialTheme.typography.headlineMedium,
+                fontFamily = fontFamily,
+//                color = Color.White,
+                fontSize = 32.sp,
+                modifier = Modifier.background(color = HomePage_Color)
+            )
+        },
         scrollBehavior = scrollBehavior,
         navigationIcon = {
             if (canNavigateBack) {
                 IconButton(onClick = navigateUp) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = "Back"
+                        contentDescription = "Back",
+                        modifier = Modifier.size(49.dp),
+                        tint = Color.White
                     )
                 }
+            }
+        },
+        actions = {
+            IconButton(onClick = { }) {
+                Icon(
+                    imageVector = Icons.Filled.AccountCircle,
+                    contentDescription = "Profile icon",
+                    modifier = Modifier.size(49.dp),
+                    tint = Color.White
+                )
             }
         }
     )
@@ -129,15 +156,15 @@ fun InventoryTopAppBar(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopListBar(navController: NavController, screenTitle: String) {
-    Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier
+    Row(horizontalArrangement = Arrangement.SpaceBetween,modifier = Modifier
         .fillMaxWidth()
         .height(80.dp)
         .background(color = HomePage_Color)
-        .padding(17.dp)){
+        .padding(17.dp) ){
         IconButton(onClick = { navController.navigate("Settings") }) {
             Icon(
-                imageVector = Icons.Filled.AccountCircle,
-                contentDescription = "Profile icon",
+                imageVector = Icons.Default.Search,
+                contentDescription = "Back",
                 modifier = Modifier.size(49.dp),
                 tint = Color.White
             )
@@ -149,15 +176,16 @@ fun TopListBar(navController: NavController, screenTitle: String) {
             color = Color.White,
             fontSize = 32.sp
         )
-        IconButton(onClick = { }) {
+        IconButton(onClick = { navController.navigate("Settings") }) {
             Icon(
-                imageVector = Icons.Default.Search,
-                contentDescription = "Search icon",
+                imageVector = Icons.Filled.AccountCircle,
+                contentDescription = "Profile icon",
                 modifier = Modifier.size(49.dp),
                 tint = Color.White
             )
         }
         }
+
     }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -207,14 +235,14 @@ fun BottomBar(navController: NavController){
     val bottomScreens = listOf(
         MenuBar.WishList,
         MenuBar.GoalList,
-        MenuBar.AddItem,
+        MenuBar.Home,
         MenuBar.ToDoList,
-        MenuBar.Home
+        MenuBar.AddItem
     )
     val backStackEntry = navController.currentBackStackEntryAsState()
     BottomNavigation(
         backgroundColor = HomePage_Color,
-        elevation = 5.dp){
+        elevation = 5.dp,){
         bottomScreens.forEach { screen ->
             val selected = screen.route == backStackEntry.value?.destination?.route
             BottomNavigationItem(
@@ -252,3 +280,4 @@ fun BottomBar(navController: NavController){
         }
 }
 }
+

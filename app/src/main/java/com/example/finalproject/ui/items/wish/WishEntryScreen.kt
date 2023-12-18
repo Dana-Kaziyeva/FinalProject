@@ -58,7 +58,7 @@ fun WishEntryScreen(
                 }
             },
             modifier = Modifier
-            .padding(innerPadding)
+                .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
                 .fillMaxWidth()
         )
@@ -90,7 +90,7 @@ fun WishEntryBody(
         }
     }
 }
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun WishInputForm(
     wishDetails: WishDetails,

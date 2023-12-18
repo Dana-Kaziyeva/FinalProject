@@ -38,7 +38,6 @@ import com.example.finalproject.InventoryTopAppBar
 import com.example.finalproject.R
 import com.example.finalproject.data.User
 import com.example.finalproject.ui.AppViewModelProvider
-
 import com.example.finalproject.ui.navigation.NavigationDestination
 import kotlinx.coroutines.launch
 
@@ -65,7 +64,8 @@ fun UserDetailsScreen(
                 canNavigateBack = true,
                 navigateUp = navigateBack
             )
-        }, floatingActionButton = {
+        },
+        floatingActionButton = {
             FloatingActionButton(
                 onClick = { navigateToEditItem(uiState.value.userDetails.id) },
                 shape = MaterialTheme.shapes.medium,
@@ -80,7 +80,7 @@ fun UserDetailsScreen(
         }, modifier = modifier
     ) { innerPadding ->
         UserDetailsBody(
-            userDetailsUiState = UserDetailsUiState(),
+            userDetailsUiState = uiState.value,
             onDelete = {
                 coroutineScope.launch {
                     viewModel.deleteItem()
@@ -107,10 +107,6 @@ private fun UserDetailsBody(
         var deleteConfirmationRequired by rememberSaveable { mutableStateOf(false) }
         UserDetails(
             item = userDetailsUiState.userDetails.toUser(), modifier = Modifier.fillMaxWidth()
-        )
-        UserDetails(
-            item = userDetailsUiState.userDetails.toUser(),
-            modifier = Modifier.fillMaxWidth()
         )
         OutlinedButton(
             onClick = { deleteConfirmationRequired = true },

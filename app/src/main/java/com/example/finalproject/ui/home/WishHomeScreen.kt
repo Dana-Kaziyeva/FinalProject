@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -36,6 +37,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
 import com.example.finalproject.InventoryTopAppBar
 import com.example.finalproject.R
 import com.example.finalproject.data.Wishes
@@ -153,11 +155,19 @@ private fun Item(
                     style = MaterialTheme.typography.titleLarge,
                 )
                 Spacer(Modifier.weight(1f))
-                Image(
-                    painter = painterResource(R.drawable.star),
-                    contentDescription = "star",
-                    contentScale = ContentScale.Crop,
-                )
+                if(item.link.isEmpty()) {
+                    Image(
+                        painter = painterResource(R.drawable.star),
+                        contentDescription = "star",
+                        contentScale = ContentScale.Crop,
+                    )
+                }else{
+                    AsyncImage(
+                        model = item.link,
+                        contentDescription = "wish_photo",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.size(90.dp))
+                }
             }
             Text(
                 text = item.desc,

@@ -44,46 +44,47 @@ class Profile {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(80.dp))
-            Card(
-                modifier = Modifier.size(150.dp),
-                shape = RectangleShape,
-                elevation = CardDefaults.cardElevation(8.dp),
-            ) {
-                AsyncImage(
-                    model = "https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG.png",
-                    contentDescription = null,
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
-            Button(
-                onClick = {
-                    renavigate()
-                },
-                modifier = Modifier
-                    .border(
-                        width = 2.dp,
-                        shape = RoundedCornerShape(16.dp),
-                        color = Color.Unspecified
+                Card(
+                    modifier = Modifier.size(150.dp),
+                    shape = RectangleShape,
+                    elevation = CardDefaults.cardElevation(8.dp),
+                ) {
+                    AsyncImage(
+                        model = imageData().random(),
+                        contentDescription = null,
+                        modifier = Modifier.fillMaxSize()
                     )
-                    .padding(end = 13.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Welcome_Color)
-            ) {
-                Text(
-                    text = "Change image",
-                    color = Color.White,
-                    fontSize = 15.sp,
+                }
+                Button(
+                    onClick = {
+                        renavigate()
+                    },
                     modifier = Modifier
-                        .clickable(
-                            onClick = {
-                                renavigate()
-                            }
-                        ),
-                )
+                        .border(
+                            width = 2.dp,
+                            shape = RoundedCornerShape(16.dp),
+                            color = Color.Unspecified
+                        )
+                        .padding(end = 13.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Welcome_Color)
+                ) {
+                    Text(
+                        text = "Change image",
+                        color = Color.White,
+                        fontSize = 15.sp,
+                        modifier = Modifier
+                            .clickable(
+                                onClick = {
+                                    renavigate()
+                                }
+                            ),
+                    )
+                }
+
             }
 
         }
     }
-}
 
 
 

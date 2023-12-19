@@ -35,5 +35,6 @@ data class User(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     var name:String,
-    var age: Int
+    var age: Int,
+//    var check: Boolean
 )

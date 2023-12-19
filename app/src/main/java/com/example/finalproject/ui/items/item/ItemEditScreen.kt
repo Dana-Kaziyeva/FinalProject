@@ -26,6 +26,7 @@ object ItemEditDestination : NavigationDestination {
 fun ItemEditScreen(
     navigateBack: () -> Unit,
     onNavigateUp: () -> Unit,
+    navigateSettings: () ->Unit,
     modifier: Modifier = Modifier,
     viewModel: ItemsEditViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -35,7 +36,8 @@ fun ItemEditScreen(
             InventoryTopAppBar(
                 title = stringResource(ItemEditDestination.titleRes),
                 canNavigateBack = true,
-                navigateUp = onNavigateUp
+                navigateUp = onNavigateUp,
+                navigateSettings = navigateSettings,
             )
         },
         modifier = modifier

@@ -11,6 +11,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -18,8 +19,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.finalproject.InventoryTopAppBar
 import com.example.finalproject.R
 import com.example.finalproject.ui.AppViewModelProvider
+import com.example.finalproject.ui.items.item.ItemEntryDestination
 import com.example.finalproject.ui.navigation.NavigationDestination
 import kotlinx.coroutines.launch
 
@@ -27,28 +30,41 @@ object GoalEntryDestination : NavigationDestination {
     override val route = "goal_entry"
     override val titleRes = R.string.goal_entry_title
 }
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GoalEntryScreen(
     navigateBack: () -> Unit,
     onNavigateUp: () -> Unit,
     canNavigateBack: Boolean = true,
+    navigateSettings: () ->Unit,
     viewModel: GoalEntryViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val coroutineScope = rememberCoroutineScope()
-    GoalEntryBody(
-        goalUiState = viewModel.goalUiState,
-        onGoalValueChange = viewModel::updateGoalUiState,
-        onSaveClick = {
-            coroutineScope.launch {
-                viewModel.saveGoal()
-                navigateBack()
-            }
-        },
-        modifier = Modifier
-//            .padding(innerPadding)
-            .verticalScroll(rememberScrollState())
-            .fillMaxWidth()
-    )
+    Scaffold(
+        topBar = {
+            InventoryTopAppBar(
+                title = stringResource(ItemEntryDestination.titleRes),
+                canNavigateBack = canNavigateBack,
+                navigateUp = onNavigateUp,
+                navigateSettings = navigateSettings,
+            )
+        }
+    ) { innerPadding ->
+        GoalEntryBody(
+            goalUiState = viewModel.goalUiState,
+            onGoalValueChange = viewModel::updateGoalUiState,
+            onSaveClick = {
+                coroutineScope.launch {
+                    viewModel.saveGoal()
+                    navigateBack()
+                }
+            },
+            modifier = Modifier
+                .padding(innerPadding)
+                .verticalScroll(rememberScrollState())
+                .fillMaxWidth()
+        )
+    }
 }
 @Composable
 fun GoalEntryBody(

@@ -1,7 +1,6 @@
 package com.example.finalproject.ui.home
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -37,7 +36,7 @@ import com.example.finalproject.R
 import com.example.finalproject.data.Goals
 import com.example.finalproject.ui.AppViewModelProvider
 import com.example.finalproject.ui.navigation.NavigationDestination
-import com.example.finalproject.ui.theme.HomePage_Color
+
 
 object GoalHomeDestination : NavigationDestination {
     override val route = "goalHome"
@@ -50,6 +49,7 @@ object GoalHomeDestination : NavigationDestination {
 fun GoalHomeScreen(
     navigateToGoalEntry: () -> Unit,
     navigateToGoalUpdate: (Int) -> Unit,
+    navigateToSettings: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -63,7 +63,7 @@ fun GoalHomeScreen(
                 title = stringResource(GoalHomeDestination.titleRes),
                 canNavigateBack = false,
                 scrollBehavior = scrollBehavior,
-
+                navigateSettings = navigateToSettings
             )
         },
         floatingActionButton = {

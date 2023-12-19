@@ -53,6 +53,7 @@ object WishHomeDestination : NavigationDestination {
 fun WishHomeScreen(
     navigateToWishEntry: () -> Unit,
     navigateToWishUpdate: (Int) -> Unit,
+    navigateToSettings: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -65,7 +66,8 @@ fun WishHomeScreen(
             InventoryTopAppBar(
                 title = stringResource(WishHomeDestination.titleRes),
                 canNavigateBack = false,
-                scrollBehavior = scrollBehavior
+                scrollBehavior = scrollBehavior,
+                navigateSettings = navigateToSettings
             )
         },
         floatingActionButton = {

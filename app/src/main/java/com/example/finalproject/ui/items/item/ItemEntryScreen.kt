@@ -35,6 +35,7 @@ object ItemEntryDestination : NavigationDestination {
 fun ItemEntryScreen(
     navigateBack: () -> Unit,
     onNavigateUp: () -> Unit,
+    navigateSettings: () ->Unit,
     canNavigateBack: Boolean = true,
     viewModel: ItemsEntryViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -44,7 +45,8 @@ fun ItemEntryScreen(
             InventoryTopAppBar(
                 title = stringResource(ItemEntryDestination.titleRes),
                 canNavigateBack = canNavigateBack,
-                navigateUp = onNavigateUp
+                navigateUp = onNavigateUp,
+                navigateSettings = navigateSettings,
             )
         }
     ) { innerPadding ->

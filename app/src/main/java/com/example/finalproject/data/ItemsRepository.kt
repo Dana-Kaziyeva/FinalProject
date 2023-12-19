@@ -46,6 +46,8 @@ interface ItemsRepository {
     suspend fun deleteUser(item: User)
 
     suspend fun updateUser(item: User)
+
+    suspend fun updateUserCheck(item: User)
 }
 
 

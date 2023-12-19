@@ -23,6 +23,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -40,6 +41,7 @@ import com.example.finalproject.data.ToDoList
 import com.example.finalproject.ui.AppViewModelProvider
 import com.example.finalproject.ui.navigation.NavigationDestination
 import com.example.finalproject.ui.theme.HomePage_Color
+import com.example.finalproject.utils.ReplyNavigationType
 
 object ItemHomeDestination : NavigationDestination {
     override val route = "itemHome"
@@ -50,21 +52,30 @@ object ItemHomeDestination : NavigationDestination {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ItemHomeScreen(
+//    windowSize: WindowWidthSizeClass,
     navigateToItemEntry: () -> Unit,
     navigateToItemUpdate: (Int) -> Unit,
+    navigateToSettings: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val itemHomeUiState by viewModel.itemHomeUiState.collectAsState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
-
+//    val contentType = when (windowSize) {
+//        WindowWidthSizeClass.Compact,
+//        WindowWidthSizeClass.Medium -> ReplyNavigationType.ListOnly
+//
+//        WindowWidthSizeClass.Expanded -> ReplyNavigationType.ListAndDetail
+//        else ->ReplyNavigationType.ListOnly
+//    }
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             InventoryTopAppBar(
                 title = stringResource(ItemHomeDestination.titleRes),
                 canNavigateBack = false,
-                scrollBehavior = scrollBehavior
+                scrollBehavior = scrollBehavior,
+                navigateSettings = navigateToSettings
             )
         },
         floatingActionButton = {
@@ -87,6 +98,23 @@ fun ItemHomeScreen(
                 .padding(innerPadding)
                 .fillMaxSize()
         )
+//        if (contentType == ReplyNavigationType.ListAndDetail) {
+//            ItemListAndDetailScreen(
+//                itemList = itemHomeUiState.itemList,
+//                selectedItem = itemHomeUiState.itemList.getOrNull(0),
+//                onClick = {
+//                    viewModel.itemHomeUiState
+//                }
+//            )
+//        }else {
+//            ItemHomeBody(
+//                itemList = itemHomeUiState.itemList,
+//                onItemClick = navigateToItemUpdate,
+//                modifier = modifier
+//                    .padding(innerPadding)
+//                    .fillMaxSize()
+//            )
+//        }
     }
 }
 

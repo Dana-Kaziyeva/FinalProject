@@ -52,6 +52,7 @@ object WishDetailsDestination : NavigationDestination {
 fun WishDetailsScreen(
     navigateToEditItem: (Int) -> Unit,
     navigateBack: () -> Unit,
+    navigateSettings: () ->Unit,
     modifier: Modifier = Modifier,
     viewModel: WishDetailsViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -62,7 +63,8 @@ fun WishDetailsScreen(
             InventoryTopAppBar(
                 title = stringResource(WishDetailsDestination.titleRes),
                 canNavigateBack = true,
-                navigateUp = navigateBack
+                navigateUp = navigateBack,
+                navigateSettings = navigateSettings,
             )
         }, floatingActionButton = {
             FloatingActionButton(

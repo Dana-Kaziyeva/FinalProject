@@ -52,6 +52,7 @@ object GoalDetailsDestination : NavigationDestination {
 fun GoalDetailsScreen(
     navigateToEditItem: (Int) -> Unit,
     navigateBack: () -> Unit,
+    navigateSettings: () ->Unit,
     modifier: Modifier = Modifier,
     viewModel: GoalDetailsViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -62,6 +63,7 @@ fun GoalDetailsScreen(
             InventoryTopAppBar(
                 title = stringResource(GoalDetailsDestination.titleRes),
                 canNavigateBack = true,
+                navigateSettings = navigateSettings,
                 navigateUp = navigateBack
             )
         }, floatingActionButton = {

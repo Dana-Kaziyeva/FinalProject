@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 
 
 class HomeViewModel(itemsRepository: ItemsRepository) : ViewModel() {
@@ -47,6 +48,13 @@ class HomeViewModel(itemsRepository: ItemsRepository) : ViewModel() {
     companion object {
         private const val TIMEOUT_MILLIS = 5_000L
     }
+
+//    val itemUiState: StateFlow<ItemHomeUiState> = itemHomeUiState
+//    fun updateCurrentItem(selectedItem: ToDoList) {
+//        itemHomeUiState.update {
+//            it.copy(currentSport = selectedSport)
+//        }
+//    }
 }
 
 

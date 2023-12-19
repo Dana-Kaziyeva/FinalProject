@@ -16,6 +16,9 @@ class UserEntryViewModel (private val itemsRepository: ItemsRepository) : ViewMo
         userUiState =
             UserUiState(userDetails = userDetails)
     }
+//    fun updateUserCheck(userDetails: UserDetails){
+//        userUiState = UserUiState(userDetails.check=true)
+//    }
     suspend fun saveUser() {
         itemsRepository.insertUser(userUiState.userDetails.toUser())
 
@@ -28,12 +31,14 @@ data class UserUiState(
 data class UserDetails(
     val id:Int =0,
     val name:String = "",
-    var age:Int =5
+    var age:Int =5,
+//    var check:Boolean =false
 )
 fun UserDetails.toUser(): User = User(
     id =id,
     name=name ?:"Ainalaiyn",
-    age=age ?:5
+    age=age ?:5,
+//    check= check?:false
 )
 fun User.toItemUiState(isEntryValid: Boolean = false): UserUiState = UserUiState(
     userDetails = this.toUserDetails(),

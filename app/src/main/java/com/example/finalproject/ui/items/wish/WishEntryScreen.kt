@@ -35,6 +35,7 @@ object WishEntryDestination : NavigationDestination {
 fun WishEntryScreen(
     navigateBack: () -> Unit,
     onNavigateUp: () -> Unit,
+    navigateSettings: () ->Unit,
     canNavigateBack: Boolean = true,
     viewModel: WishEntryViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -44,7 +45,8 @@ fun WishEntryScreen(
             InventoryTopAppBar(
                 title = stringResource(ItemEntryDestination.titleRes),
                 canNavigateBack = canNavigateBack,
-                navigateUp = onNavigateUp
+                navigateUp = onNavigateUp,
+                navigateSettings = navigateSettings,
             )
         }
     ) { innerPadding ->

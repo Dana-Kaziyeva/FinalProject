@@ -40,16 +40,18 @@ import com.example.finalproject.ui.items.wish.WishEditScreen
 import com.example.finalproject.ui.items.wish.WishEntryDestination
 import com.example.finalproject.ui.items.wish.WishEntryScreen
 import com.example.finalproject.ui.screens.HomePageLayout
-import com.example.finalproject.ui.screens.Settings
+import com.example.finalproject.ui.screens.Profile
 import com.example.finalproject.ui.screens.WelcomePage
 import kotlin.random.Random
 
 @Composable
-fun NavGraph(navController: NavHostController,
+fun NavGraph(
+//    windowSize: WindowWidthSizeClass,
+    navController: NavHostController,
              modifier: Modifier = Modifier,) {
     NavHost(
         navController = navController,
-        startDestination = "HomePage",
+        startDestination = "WelcomePage",
         modifier = modifier
     )
     {
@@ -58,19 +60,27 @@ fun NavGraph(navController: NavHostController,
                 navigateToHomePage = { navController.navigate("HomePage") }
             )
         }
+//        composable(route = "Profile")
+//            {
+//            Settings( navigateToProfile = {navController.navigate("Settings")})
+//        }
+
+        composable("Settings") {
+//            Profile().Profile(navigateToSettings = {navController.navigate("Profile")})
+            Profile().Profile(renavigate = {navController.navigate("Settings")})
+
+        }
         composable("HomePage") {
             HomePageLayout(WelcomePage(), Random.nextInt(1,24),
-                 navigateToSettings = {navController.navigate("Settings")} )
-        }
-        composable("Settings") {
-            Settings()
+                navigateToSettings = {navController.navigate("Settings")} )
         }
         composable(route = ItemHomeDestination.route) {
             ItemHomeScreen(
+//                windowSize,
                 navigateToItemEntry = { navController.navigate(ItemEntryDestination.route) },
                 navigateToItemUpdate = {
-                    navController.navigate("${ItemDetailsDestination.route}/${it}")
-                }
+                    navController.navigate("${ItemDetailsDestination.route}/${it}")},
+                navigateToSettings = {navController.navigate("Settings")}
             )
         }
             composable(route = WishHomeDestination.route) {
@@ -78,7 +88,8 @@ fun NavGraph(navController: NavHostController,
                 navigateToWishEntry = { navController.navigate(WishEntryDestination.route) },
                 navigateToWishUpdate = {
                     navController.navigate("${WishDetailsDestination.route}/${it}")
-                }
+                },
+                navigateToSettings = {navController.navigate("Settings")}
             )
         }
             composable(route = GoalHomeDestination.route) {
@@ -86,7 +97,8 @@ fun NavGraph(navController: NavHostController,
                 navigateToGoalEntry = { navController.navigate(GoalEntryDestination.route) },
                 navigateToGoalUpdate = {
                     navController.navigate("${GoalDetailsDestination.route}/${it}")
-                }
+                },
+                navigateToSettings = {navController.navigate("Settings")}
             )
         }
             composable(route = UserHomeDestination.route) {
@@ -100,15 +112,18 @@ fun NavGraph(navController: NavHostController,
 
         composable(route = ItemEntryDestination.route) {
             ItemEntryScreen(navigateBack = { navController.popBackStack() },
-                onNavigateUp = { navController.navigateUp() })
+                onNavigateUp = { navController.navigateUp()},
+                    navigateSettings = {navController.navigate("Settings")})
         }
         composable(route = WishEntryDestination.route) {
             WishEntryScreen(navigateBack = { navController.popBackStack() },
-                onNavigateUp = { navController.navigateUp() })
+                onNavigateUp = { navController.navigateUp() },
+                navigateSettings = {navController.navigate("Settings")})
         }
         composable(route = GoalEntryDestination.route) {
             GoalEntryScreen(navigateBack = { navController.popBackStack() },
-                onNavigateUp = { navController.navigateUp() })
+                onNavigateUp = { navController.navigateUp() },
+                navigateSettings = {navController.navigate("Settings")})
         }
         composable(route = UserEntryDestination.route) {
             UserEntryScreen(navigateBack = { navController.popBackStack() },
@@ -123,7 +138,8 @@ fun NavGraph(navController: NavHostController,
         ) {
             ItemDetailsScreen(
                 navigateToEditItem = { navController.navigate("${ItemEditDestination.route}/$it") },
-                navigateBack = { navController.navigateUp() })
+                navigateBack = { navController.navigateUp() },
+                navigateSettings = {navController.navigate("Settings")})
         }
         composable(
             route = WishDetailsDestination.routeWithArgs,
@@ -136,7 +152,8 @@ fun NavGraph(navController: NavHostController,
                 {
                     navController.navigate("${WishEditDestination.route}/$it")
                 },
-                navigateBack = { navController.navigateUp() })
+                navigateBack = { navController.navigateUp() },
+                navigateSettings = {navController.navigate("Settings")})
         }
         composable(
             route = GoalDetailsDestination.routeWithArgs,
@@ -149,7 +166,8 @@ fun NavGraph(navController: NavHostController,
                 {
                     navController.navigate("${GoalEditDestination.route}/$it")
                 },
-                navigateBack = { navController.navigateUp() })
+                navigateBack = { navController.navigateUp() },
+                navigateSettings = {navController.navigate("Settings")})
         }
         composable(
             route = UserDetailsDestination.routeWithArgs,
@@ -171,7 +189,8 @@ fun NavGraph(navController: NavHostController,
             })
         ) {
             ItemEditScreen(navigateBack = { navController.popBackStack() },
-                onNavigateUp = { navController.navigateUp() })
+                onNavigateUp = { navController.navigateUp() },
+                navigateSettings = {navController.navigate("Settings")})
         }
         composable(
             route = WishEditDestination.routeWithArgs,
@@ -180,7 +199,8 @@ fun NavGraph(navController: NavHostController,
             })
         ) {
             WishEditScreen(navigateBack = { navController.popBackStack() },
-                onNavigateUp = { navController.navigateUp() })
+                onNavigateUp = { navController.navigateUp() },
+                navigateSettings = {navController.navigate("Settings")})
         }
         composable(
             route = GoalEditDestination.routeWithArgs,
@@ -189,7 +209,8 @@ fun NavGraph(navController: NavHostController,
             })
         ) {
             GoalEditScreen(navigateBack = { navController.popBackStack() },
-                onNavigateUp = { navController.navigateUp() })
+                onNavigateUp = { navController.navigateUp() },
+                navigateSettings = {navController.navigate("Settings")})
         }
         composable(
             route = UserEditDestination.routeWithArgs,

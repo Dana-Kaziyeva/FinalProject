@@ -53,6 +53,7 @@ object ItemDetailsDestination : NavigationDestination {
 fun ItemDetailsScreen(
     navigateToEditItem: (Int) -> Unit,
     navigateBack: () -> Unit,
+    navigateSettings: () ->Unit,
     modifier: Modifier = Modifier,
     viewModel: ItemsDetailsViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -63,6 +64,7 @@ fun ItemDetailsScreen(
             InventoryTopAppBar(
                 title = stringResource(ItemDetailsDestination.titleRes),
                 canNavigateBack = true,
+                navigateSettings = navigateSettings,
                 navigateUp = navigateBack
             )
         }, floatingActionButton = {

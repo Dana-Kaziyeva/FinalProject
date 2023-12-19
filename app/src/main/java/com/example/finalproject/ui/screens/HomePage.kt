@@ -8,19 +8,22 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.finalproject.InventoryTopAppBar
 import com.example.finalproject.R
-import com.example.finalproject.TopHomeBar
 
 class Pair {
     val desc = ""
@@ -78,12 +81,23 @@ class Pair {
             "Mark Cuban")
 
     )
+    @OptIn(ExperimentalMaterial3Api::class)
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @Composable
-    fun HomePageLayout(welcome: WelcomePage, n:Int, navigateToSettings: () -> Unit) {
+    fun HomePageLayout(
+        welcome: WelcomePage, n:Int,
+        navigateToSettings: () -> Unit,
+        modifier: Modifier = Modifier,) {
+        val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
         Scaffold(
+            modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
             topBar = {
-                TopHomeBar({ navigateToSettings() })
+                InventoryTopAppBar(
+                    title = "Hi, " + WelcomePage().getName(),
+                    canNavigateBack = false,
+                    scrollBehavior = scrollBehavior,
+                    navigateSettings = navigateToSettings
+                )
             },
         ) {
             Column(

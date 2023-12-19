@@ -32,11 +32,11 @@ sealed class MenuBar(
         icon = Icons.Rounded.Place
     )
 
-    object AddItem : MenuBar(
-        route = UserHomeDestination.route,
-        title = "Add item",
-        icon = Icons.Rounded.AddCircle
-    )
+//    object AddItem : MenuBar(
+//        route = UserHomeDestination.route,
+//        title = "Add item",
+//        icon = Icons.Rounded.AddCircle
+//    )
 
     object ToDoList : MenuBar(
         route = ItemHomeDestination.route,

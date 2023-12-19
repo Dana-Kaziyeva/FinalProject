@@ -68,6 +68,9 @@ interface ItemDao {
     @Update
     suspend fun updateUser(item: User)
 
+    @Update
+    suspend fun updateUserCheck(item: User)
+
     @Delete
     suspend fun deleteUser(item: User)
 
